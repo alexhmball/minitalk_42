@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/aball/Desktop/Cursus/minitalk_linux'
+make -C libft
+ 
+gcc -Wall -Wextra -Werror -D SLEEP=42 client.c libft/libft.a -o client
+gcc -Wall -Wextra -Werror -D SLEEP=42 server.c libft/libft.a -o server
+gcc -Wall -Wextra -Werror    server.c   -o server
+make: Leaving directory `/Users/aball/Desktop/Cursus/minitalk_linux'
+ 
