@@ -3,18 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aball <aball@student.42.fr>                +#+  +:+       +#+         #
+#    By: ballzball <ballzball@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/17 20:26:00 by aball             #+#    #+#              #
-#    Updated: 2022/04/17 23:44:00 by aball            ###   ########.fr        #
+#    Updated: 2022/04/18 01:43:31 by ballzball        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ACH = ${shell uname}
-
-NAME = client
-
-NAME2 = server
 
 ifeq (${ACH}, Linux)
 SLEEP_s = 0
@@ -28,20 +24,25 @@ CC = gcc
 
 RM = rm -fr
 
-all: libft ${NAME} ${NAME2}
+all: libft client server
 
-$(NAME): client.c server.c
-		${CC} ${CFLAGS} -D SLEEP=${SLEEP_s} client.c libft/libft.a -o client
-		${CC} ${CFLAGS} -D SLEEP=${SLEEP_s} server.c libft/libft.a -o server
+$(NAME): all
+
 libft:
 		make -C libft
+
+client: client.c
+		${CC} ${CFLAGS} -D SLEEP=${SLEEP_s} client.c libft/libft.a -o client
+
+server: server.c
+		${CC} ${CFLAGS} -D SLEEP=${SLEEP_s} server.c libft/libft.a -o server
 
 clean:
 		make clean -C libft
 
 fclean:
 		make fclean -C libft
-		${RM} ${NAME} ${NAME2}
+		${RM} client server
 
 re: fclean all
 

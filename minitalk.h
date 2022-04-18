@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aball <aball@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ballzball <ballzball@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:26:08 by aball             #+#    #+#             */
-/*   Updated: 2022/04/17 20:53:48 by aball            ###   ########.fr       */
+/*   Updated: 2022/04/18 21:45:20 by ballzball        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_client
 {
 	int		num[7];
 	int		index;
-	int		c;
 	char	*str;
 }		t_client;
 

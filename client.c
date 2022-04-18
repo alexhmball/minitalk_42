@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aball <aball@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ballzball <ballzball@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:26:05 by aball             #+#    #+#             */
-/*   Updated: 2022/04/18 00:35:19 by aball            ###   ########.fr       */
+/*   Updated: 2022/04/18 21:50:27 by ballzball        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,30 @@ t_client	g_nums;
 
 void	send_signal(int pid)
 {
-	if (g_nums.num[g_nums.c] == 0 && g_nums.str[g_nums.index])
+	static int i;
+	
+	usleep(SLEEP);
+	if (g_nums.num[i] == 0 && g_nums.str[g_nums.index])
 	{
-		g_nums.c++;
-		usleep(SLEEP);
+		i++;
 		if (kill(pid, SIGUSR1) == -1)
 		{
-			ft_printf("wrong pid");
 			free (g_nums.str);
 			exit (1);
 		}
 	}
-	else if (g_nums.num[g_nums.c] == 1 && g_nums.str[g_nums.index])
+	else if (g_nums.num[i] == 1 && g_nums.str[g_nums.index])
 	{
-		g_nums.c++;
-		usleep(SLEEP);
+		i++;
 		if (kill(pid, SIGUSR2) == -1)
 		{
-			ft_printf("wrong pid");
 			free (g_nums.str);
 			exit (1);
 		}
 	}
-	if (g_nums.c > 6)
+	if (i > 6)
 	{
-		g_nums.c = 0;
+		i = 0;
 		ft_memset(g_nums.num, 0, 7 * 4);
 		g_nums.index++;
 	}
@@ -73,6 +72,7 @@ void	convert_to_binary(int c)
 int	main(int ac, char **av)
 {
 	struct sigaction	sa;
+	int					i;
 
 	if (ac != 3)
 		return (0);
@@ -85,11 +85,12 @@ int	main(int ac, char **av)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_sigaction = &sighandler;
 	g_nums.index = 0;
-	g_nums.c = 0;
+	i = 0;
 	g_nums.str = ft_strdup(av[2]);
 	convert_to_binary(av[2][g_nums.index]);
 	send_signal(ft_atoi(av[1]));
 	sigaction(SIGUSR1, &sa, NULL);
+	i++;
 	while (av[2][g_nums.index])
 	{
 		convert_to_binary(av[2][g_nums.index]);
