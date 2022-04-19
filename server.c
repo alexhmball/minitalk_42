@@ -6,7 +6,7 @@
 /*   By: ballzball <ballzball@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:26:03 by aball             #+#    #+#             */
-/*   Updated: 2022/04/18 01:34:09 by ballzball        ###   ########.fr       */
+/*   Updated: 2022/04/19 03:19:40 by ballzball        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,13 @@ void	sighandler_1(int signum, siginfo_t *info, void *context)
 	}
 	if (i > 6)
 	{
-		write(1, &c, 1);
 		i = 0;
+		if (c == 0)
+		{
+			kill(info->si_pid, SIGUSR2);
+			return ;
+		}
+		write(1, &c, 1);
 		c = 0;
 	}
 	usleep(SLEEP);
