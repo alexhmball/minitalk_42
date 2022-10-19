@@ -6,7 +6,7 @@
 /*   By: aball <aball@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:26:05 by aball             #+#    #+#             */
-/*   Updated: 2022/04/24 03:08:26 by aball            ###   ########.fr       */
+/*   Updated: 2022/10/19 14:32:05 by aball            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int ac, char **av)
 	c = 0;
 	if (ac != 3)
 		return (0);
-	if (!ft_isdigit(av[1][0]))
+	if (!ft_isdigit(av[1][0]) || av[1][0] == '0')
 	{
 		ft_printf("wrong pid");
 		exit (1);
