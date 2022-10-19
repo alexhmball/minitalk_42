@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ballzball <ballzball@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aball <aball@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 20:26:05 by aball             #+#    #+#             */
-/*   Updated: 2022/04/19 03:40:38 by ballzball        ###   ########.fr       */
+/*   Updated: 2022/04/24 03:08:26 by aball            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int g_binary[7];
+int	g_binary[7];
 
 void	send_signal(int pid, int signum)
 {
-	static int i;
-	
+	static int	i;
+
 	usleep(SLEEP);
 	if (signum == SIGUSR2)
 		exit (0);
